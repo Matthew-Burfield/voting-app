@@ -1,0 +1,51 @@
+{
+  "name": "VotingApp",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://Matthew-Burfield.github.io/voting-app",
+  "devDependencies": {
+    "codecov.io": "^0.1.6",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
+    "gh-pages": "^1.0.0",
+    "ghooks": "^2.0.0",
+    "npm-run-all": "^4.0.2",
+    "react-scripts": "1.0.10",
+    "semantic-release": "^6.3.6"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom --coverage",
+    "eject": "react-scripts eject",
+    "report-coverage": "cat ./coverage/lcov.info | codecov"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "yarn test"
+    }
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 0,
+        "functions": 0,
+        "lines": 0,
+        "statements": 0
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Matthew-Burfield/voting-app.git"
+  }
+}
