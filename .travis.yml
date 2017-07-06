@@ -10,7 +10,7 @@ node_js:
 before_script:
   - npm prune
 after_success:
-  - npm run depoy
+  - npm run deploy
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
