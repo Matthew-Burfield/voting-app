@@ -10,7 +10,8 @@ export default {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '20px 50px',
-    backgroundColor: backgroundColor
+    backgroundColor: backgroundColor,
+    color: mainTextColor
   },
   navLinks: {
     padding: '0 20px',

@@ -7,7 +7,7 @@ const RadiumLink = Radium(Link)
 
 const TopNav = () => (
   <nav style={s.navContainer}>
-    <div style={s.navLinks}>Voting App</div>
+    <div>Voting App</div>
     <div className='navItems'>
       <RadiumLink style={s.navLinks} to='/'>Home</RadiumLink>
       <RadiumLink style={s.navLinks} to='/polls'>Polls</RadiumLink>
