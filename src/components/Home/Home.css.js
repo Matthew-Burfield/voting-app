@@ -7,7 +7,7 @@ export default {
     height: 80
   },
   appHeader: {
-    backgroundColor: '#222',
+    background: 'linear-gradient(to bottom right, Crimson, Maroon)',
     height: 150,
     padding: 20,
     color: 'white'
