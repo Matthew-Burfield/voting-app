@@ -8,10 +8,16 @@
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.1.1",
+    "eslint-config-standard": "10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
     "gh-pages": "^1.0.0",
     "ghooks": "^2.0.0",
     "isomorphic-style-loader": "^2.0.0",
-    "npm-run-all": "^4.0.2"
+    "npm-run-all": "^4.0.2",
+    "radium": "^0.19.1"
   },
   "dependencies": {
     "autoprefixer": "7.1.1",
