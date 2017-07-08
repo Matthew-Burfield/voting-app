@@ -21,7 +21,7 @@ const comment = [
   }
 ]
 
-describe('Component renders correctly', () => {
+describe('Component renders correctly with comments', () => {
   const wrapper = mount(<Comments comments={comment} />)
   const items = wrapper.find('.commentContainer')
   test('should render 3 comments', () => {
@@ -38,5 +38,17 @@ describe('Component renders correctly', () => {
 
   test('should render third comment correctly', () => {
     expect(items.childAt(2).text()).toBe(THIRD_COMMENT)
+  })
+})
+
+describe('Component renders correctly without comments', () => {
+  const wrapper = mount(<Comments />)
+  const items = wrapper.find('.commentContainer')
+  test('should render 1 comments', () => {
+    expect(items.children().length).toBe(1)
+  })
+
+  test('should render "There are no comments for this poll, yet."', () => {
+    expect(items.childAt(0).text()).toBe('There are no comments for this poll, yet.')
   })
 })

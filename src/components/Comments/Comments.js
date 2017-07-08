@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Comments = ({ comments }) => {
-  if (comments.length > 0) {
+  if (typeof comments === 'object' && comments.constructor === Array && comments.length > 0) {
     return (
       <div className='commentContainer'>
         {comments.map(comment => (
@@ -11,15 +11,15 @@ const Comments = ({ comments }) => {
       </div>
     )
   }
-  return <div><p>There are no comments for this poll, yet.</p></div>
+  return <div className='commentContainer'><p>There are no comments for this poll, yet.</p></div>
 }
 
 Comments.propTypes = {
   comments: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.number.isRequired,
       comment: PropTypes.string,
-      creatorId: PropTypes.number
+      creatorId: PropTypes.number.isRequired
     })
   )
 }

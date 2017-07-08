@@ -5,12 +5,9 @@ import LatestPoll from '../LatestPoll/LatestPoll'
 const Home = () => (
   <div style={s.app}>
     <div style={s.appHeader}>
-      <h2>Latest Poll</h2>
+      <h1>Latest Poll</h1>
     </div>
     <LatestPoll />
-    <p style={s.appIntro}>
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
   </div>
 )
 
