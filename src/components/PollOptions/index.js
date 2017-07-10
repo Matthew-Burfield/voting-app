@@ -15,6 +15,9 @@ class PollOptions extends React.Component {
 
   handleOptionChange (e) {
     e.preventDefault()
+    this.setState({
+      optionValue: e.target.value
+    })
     console.log(e.target.value)
   }
 
@@ -22,19 +25,36 @@ class PollOptions extends React.Component {
     e.preventDefault()
   }
 
+  ifOptionsAvailable () {
+    return this.props.options && this.props.options.length > 0
+  }
+
   render () {
     const { options } = this.props
+    const optionsAvailable = this.ifOptionsAvailable()
     return (
       <div>
         <form>
-          {options.map(option => (
-            <div key={option.id} style={s.radioButtonContainer}>
-              <input onChange={this.handleOptionChange} type='radio' name='poll' value={option.name} />
-              <span>{option.name}</span>
+          {!optionsAvailable &&
+            <div>
+              There are no options for this poll yet. Please add one.
             </div>
-          ))}
+          }
+          {optionsAvailable &&
+            options.map(option => (
+              <div key={option.id} style={s.radioButtonContainer}>
+                <input
+                  type='radio'
+                  name='poll'
+                  onChange={this.handleOptionChange}
+                  value={option.name}
+                  checked={this.state.optionValue === option.name}
+                />
+                <span>{option.name}</span>
+              </div>
+            ))}
           <div>
-            <button type='submit'>Vote</button>
+            {optionsAvailable && <button type='submit'>Vote</button>}
             <button onClick={this.handleButtonClick}>New Poll Option</button>
           </div>
         </form>
