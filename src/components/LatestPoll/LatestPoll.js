@@ -1,6 +1,9 @@
 import React from 'react'
-import s from './LatestPoll.css'
+// import PropTypes from 'prop-types'
+
+import PollOptions from '../PollOptions'
 import Comments from '../Comments/Comments'
+import s from './LatestPoll.css'
 
 const poll = {
   title: 'Who is your favourite captain?',
@@ -24,32 +27,6 @@ const user = {
   name: 'Matthew'
 }
 
-const handleButtonClick = (e) => {
-  e.preventDefault()
-}
-
-const handleSubmit = (e) => {
-  e.preventDefault()
-  console.log(e)
-}
-
-const renderPollOptions = (options) => (
-  <div>
-    <form onSubmit={handleSubmit}>
-      {options.map(option => (
-        <div key={option.id} style={s.radioButtonContainer}>
-          <input type='radio' name='poll' value={option.name} />
-          <span>{option.name}</span>
-        </div>
-      ))}
-      <div>
-        <button type='submit'>Vote</button>
-        <button onClick={handleButtonClick}>New Poll Option</button>
-      </div>
-    </form>
-  </div>
-)
-
 const renderPollResults = (options) => (
   <div>
     {options.map(option => (
@@ -64,7 +41,7 @@ const renderPoll = (userId, poll) => {
   if (poll.usersThatHaveVoted.includes(userId)) {
     return renderPollResults(poll.options)
   }
-  return renderPollOptions(poll.options)
+  return <PollOptions options={poll.options} />
 }
 
 const LatestPoll = () => (
