@@ -11,10 +11,10 @@ class PollOptions extends React.Component {
     }
     this.handleOptionChange = this.handleOptionChange.bind(this)
     this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   handleOptionChange (e) {
-    e.preventDefault()
     this.setState({
       optionValue: e.target.value
     })
@@ -23,6 +23,11 @@ class PollOptions extends React.Component {
 
   handleButtonClick (e) {
     e.preventDefault()
+  }
+
+  handleFormSubmit (e) {
+    e.preventDefault()
+    this.props.onVote(this.state.optionValue)
   }
 
   ifOptionsAvailable () {
@@ -34,7 +39,7 @@ class PollOptions extends React.Component {
     const optionsAvailable = this.ifOptionsAvailable()
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleFormSubmit}>
           {!optionsAvailable &&
             <div>
               There are no options for this poll yet. Please add one.
@@ -51,6 +56,7 @@ class PollOptions extends React.Component {
                   checked={this.state.optionValue === option.name}
                 />
                 <span>{option.name}</span>
+                <span>{option.score}</span>
               </div>
             ))}
           <div>
@@ -65,10 +71,15 @@ class PollOptions extends React.Component {
 
 PollOptions.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
     score: PropTypes.number
-  }))
+  })),
+  onVote: PropTypes.func.isRequired
+}
+
+PollOptions.defaultProps = {
+  options: []
 }
 
 export default PollOptions
