@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { increaseVote } from '../../redux/actionCreators'
+import { userVoted } from '../../redux/actionCreators'
 import Poll from './elements/Poll'
 import Comments from '../Comments/Comments'
-import s from './LatestPoll.css'
+import s from './styles.css'
 
 const handleOnVoteCreator = (increaseVote, poll) => {
   return function (optionId) {
-    increaseVote(poll, optionId)
+    userVoted(poll, optionId)
   }
 }
 
@@ -54,8 +54,8 @@ LatestPoll.propTypes = {
 }
 
 const mapActionsToProps = (dispatch) => ({
-  increaseVote (poll, optionId) {
-    return dispatch(increaseVote(poll, optionId))
+  userVoted (userId, optionId) {
+    return dispatch(userVoted(userId, optionId))
   }
 })
 

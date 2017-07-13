@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './Home.css'
-import LatestPoll from '../LatestPoll/LatestPoll'
+import LatestPoll from '../LatestPoll'
 
 const Home = () => (
   <div style={s.app}>
