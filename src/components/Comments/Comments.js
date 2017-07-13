@@ -17,9 +17,9 @@ const Comments = ({ comments }) => {
 Comments.propTypes = {
   comments: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       comment: PropTypes.string,
-      creatorId: PropTypes.number.isRequired
+      creatorId: PropTypes.string.isRequired
     })
   )
 }

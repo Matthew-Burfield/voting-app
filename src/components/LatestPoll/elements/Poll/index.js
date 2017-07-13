@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import s from './PollOptions.css'
+import s from './styles.css'
 
-class PollOptions extends React.Component {
+class Poll extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      optionValue: ''
+      selectedOption: null
     }
     this.handleOptionChange = this.handleOptionChange.bind(this)
     this.handleButtonClick = this.handleButtonClick.bind(this)
@@ -16,7 +16,7 @@ class PollOptions extends React.Component {
 
   handleOptionChange (e) {
     this.setState({
-      optionValue: e.target.value
+      selectedOption: e.target.value
     })
     console.log(e.target.value)
   }
@@ -27,7 +27,7 @@ class PollOptions extends React.Component {
 
   handleFormSubmit (e) {
     e.preventDefault()
-    this.props.onVote(this.state.optionValue)
+    this.props.onVote(this.state.selectedOption)
   }
 
   ifOptionsAvailable () {
@@ -52,8 +52,8 @@ class PollOptions extends React.Component {
                   type='radio'
                   name='poll'
                   onChange={this.handleOptionChange}
-                  value={option.name}
-                  checked={this.state.optionValue === option.name}
+                  value={option.id}
+                  checked={this.state.selectedOption === option.id}
                 />
                 <span>{option.name}</span>
                 <span>{option.score}</span>
@@ -69,17 +69,17 @@ class PollOptions extends React.Component {
   }
 }
 
-PollOptions.propTypes = {
+Poll.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     score: PropTypes.number
   })),
   onVote: PropTypes.func.isRequired
 }
 
-PollOptions.defaultProps = {
+Poll.defaultProps = {
   options: []
 }
 
-export default PollOptions
+export default Poll

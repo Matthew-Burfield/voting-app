@@ -2,77 +2,60 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import PollOptions from '../PollOptions'
+import { increaseVote } from '../../redux/actionCreators'
+import Poll from './elements/Poll'
 import Comments from '../Comments/Comments'
 import s from './LatestPoll.css'
 
-const renderPollResults = (options) => (
-  <div>
-    {options.map(option => (
-      <div key={option.id} style={s.radioButtonContainer}>
-        <p>{option.name} : {option.score}</p>
-      </div>
-    ))}
-  </div>
-)
-
-const renderPoll = (userId, poll) => {
-  if (poll.usersThatHaveVoted.includes(userId)) {
-    return renderPollResults(poll.options)
+const handleOnVoteCreator = (increaseVote, poll) => {
+  return function (optionId) {
+    increaseVote(poll, optionId)
   }
+}
+
+const LatestPoll = (props) => {
+  const handleOnVote = handleOnVoteCreator(props.increaseVote, props.poll)
   return (
-    <PollOptions
-      options={poll.options}
-      onVote={handleOnVote}
-    />
+    <section style={s.section}>
+      <div>
+        <h2>{props.poll.title}</h2>
+        <h4>by {props.user.name}</h4>
+      </div>
+      {/* if (poll.usersThatHaveVoted.includes(userId)) {
+        return renderPollResults(poll.options)
+      } */}
+      <Poll onVote={handleOnVote} options={props.poll.options} />
+      <Comments comments={props.poll.comments} />
+    </section>
   )
 }
-
-const handleOnVote = (vote) => {
-  // const selectedVote = this.state.poll.options.find(option => {
-  //   return option.name === vote
-  // })
-  // const newScore = selectedVote.score + 1
-  // const newVote = Object.assign({}, selectedVote, { score: newScore })
-}
-
-const LatestPoll = ({ poll, user, dispatch }) => (
-  <section style={s.section}>
-    <div>
-      <h2>{poll.title}</h2>
-      <h4>by {user.name}</h4>
-    </div>
-    {renderPoll(user.id, poll)}
-    <Comments comments={poll.comments} />
-  </section>
-)
 
 LatestPoll.propTypes = {
   poll: PropTypes.shape({
     title: PropTypes.string,
-    creatorId: PropTypes.number,
+    creatorId: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
       name: PropTypes.string,
       score: PropTypes.number
     })),
-    usersThatHaveVoted: PropTypes.arrayOf(PropTypes.number),
+    usersThatHaveVoted: PropTypes.arrayOf(PropTypes.string),
     comments: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      creatorId: PropTypes.number,
+      id: PropTypes.string,
+      creatorId: PropTypes.string,
       comment: PropTypes.string
     }))
   }),
   user: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     name: PropTypes.string
   }),
-  dispatch: PropTypes.func
+  increaseVote: PropTypes.func
 }
 
 const mapActionsToProps = (dispatch) => ({
   increaseVote (poll, optionId) {
-    return null
+    return dispatch(increaseVote(poll, optionId))
   }
 })
 
