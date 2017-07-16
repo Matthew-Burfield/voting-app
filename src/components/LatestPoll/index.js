@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import { addUserHasVoted, increaseVote } from '../../redux/actionCreators'
 import Poll from './elements/Poll'
+import PollStats from './elements/PollStats'
 import Comments from '../Comments/Comments'
 import s from './styles.css'
 
@@ -16,16 +17,19 @@ const handleOnVoteCreator = (userId, increaseVote, addUserHasVoted) => {
 
 const LatestPoll = (props) => {
   const handleOnVote = handleOnVoteCreator(props.user.id, props.increaseVote, props.addUserHasVoted)
+  const userHasVoted = props.poll.usersThatHaveVoted.includes(props.user.id)
   return (
     <section style={s.section}>
       <div>
         <h2>{props.poll.title}</h2>
         <h4>by {props.user.name}</h4>
       </div>
-      {/* if (poll.usersThatHaveVoted.includes(userId)) {
-        return renderPollResults(poll.options)
-      } */}
-      <Poll onVote={handleOnVote} options={props.poll.options} />
+      {userHasVoted &&
+        <PollStats options={props.poll.options} />
+      }
+      {!userHasVoted &&
+        <Poll onVote={handleOnVote} options={props.poll.options} />
+      }
       <Comments comments={props.poll.comments} />
     </section>
   )
