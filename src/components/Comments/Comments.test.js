@@ -52,3 +52,12 @@ describe('Component renders correctly without comments', () => {
     expect(items.childAt(0).text()).toBe('There are no comments for this poll, yet.')
   })
 })
+
+describe('User can create a comment for the poll', () => {
+  // const wrapper = mount(<Comments />)
+  // const commentInput = wrapper.find('form')
+  // Expect form to have one input item, a text box
+
+  // Expect that when a user creates a comment, the list of comments increases by 1.
+  // Expect that when a user submits a comment, that comment is then rendered as the latest comment
+})
