@@ -22,13 +22,11 @@ const DEFAULT_STATE = {
 
 const increaseVote = (state, action) => {
   const cloneOptions = JSON.parse(JSON.stringify(state.options))
-  const currOptionClone = cloneOptions.find(option => {
-    if (option.id === action.optionId) {
-      return option
-    }
+  const optionIndex = cloneOptions.findIndex(option => {
+    return option.id === action.optionId
   })
-  currOptionClone.score += 1
-  return Object.assign({}, state, { options: currOptionClone })
+  cloneOptions[optionIndex].score += 1
+  return Object.assign({}, state, { options: cloneOptions })
 }
 
 const addUserHasVoted = (state, action) => {

@@ -3,11 +3,6 @@ import {
   ADD_USER_HAS_VOTED
 } from './actions'
 
-export const userVoted = (userId, optionId) => {
-  increaseVote(optionId)
-  addUserHasVoted(userId)
-}
-
 export const increaseVote = (optionId) => {
   return {
     type: INCREASE_VOTE,

@@ -2,19 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { userVoted } from '../../redux/actionCreators'
+import { addUserHasVoted, increaseVote } from '../../redux/actionCreators'
 import Poll from './elements/Poll'
 import Comments from '../Comments/Comments'
 import s from './styles.css'
 
-const handleOnVoteCreator = (increaseVote, poll) => {
+const handleOnVoteCreator = (userId, increaseVote, addUserHasVoted) => {
   return function (optionId) {
-    userVoted(poll, optionId)
+    increaseVote(optionId)
+    addUserHasVoted(userId)
   }
 }
 
 const LatestPoll = (props) => {
-  const handleOnVote = handleOnVoteCreator(props.increaseVote, props.poll)
+  const handleOnVote = handleOnVoteCreator(props.user.id, props.increaseVote, props.addUserHasVoted)
   return (
     <section style={s.section}>
       <div>
@@ -50,12 +51,16 @@ LatestPoll.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
   }),
-  increaseVote: PropTypes.func
+  increaseVote: PropTypes.func.isRequired,
+  addUserHasVoted: PropTypes.func.isRequired
 }
 
 const mapActionsToProps = (dispatch) => ({
-  userVoted (userId, optionId) {
-    return dispatch(userVoted(userId, optionId))
+  addUserHasVoted (userId) {
+    return dispatch(addUserHasVoted(userId))
+  },
+  increaseVote (optionId) {
+    return dispatch(increaseVote(optionId))
   }
 })
 
