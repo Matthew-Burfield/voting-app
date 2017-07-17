@@ -1,6 +1,7 @@
 import {
   INCREASE_VOTE,
-  ADD_USER_HAS_VOTED
+  ADD_USER_HAS_VOTED,
+  SAVE_COMMENT
 } from '../actions'
 
 const DEFAULT_STATE = {
@@ -34,12 +35,28 @@ const addUserHasVoted = (state, action) => {
   return Object.assign({}, state, { usersThatHaveVoted: newVotedUsersList })
 }
 
+const saveComment = (state, action) => {
+  const cloneComments = JSON.parse(JSON.stringify(state.comments))
+  const nextId = cloneComments.reduce((num, comment) => {
+    const currentId = Number(comment.id)
+    return currentId > num ? currentId : num
+  }, 0)
+  cloneComments.push({
+    id: `${nextId + 1}`,
+    creatorId: action.payload.userId,
+    comment: action.payload.commentValue
+  })
+  return Object.assign({}, state, { comments: cloneComments })
+}
+
 export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case INCREASE_VOTE:
       return increaseVote(state, action)
     case ADD_USER_HAS_VOTED:
       return addUserHasVoted(state, action)
+    case SAVE_COMMENT:
+      return saveComment(state, action)
     default:
       return state
   }

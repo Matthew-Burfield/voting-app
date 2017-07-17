@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+import { saveComment } from '../../../../redux/actionCreators'
 
 class NewCommentForm extends Component {
   constructor (props) {
@@ -13,6 +16,10 @@ class NewCommentForm extends Component {
 
   handleOnSubmit (e) {
     e.preventDefault()
+    this.setState({
+      commentValue: ''
+    })
+    this.props.saveComment(this.props.userId, this.state.commentValue)
   }
 
   handleOnTextChange (e) {
@@ -30,13 +37,25 @@ class NewCommentForm extends Component {
           onChange={this.handleOnTextChange}
           autoFocus={false}
         />
+        <button type='submit'>Submit</button>
       </form>
     )
   }
 }
 
-// NewCommentForm.propTypes = {
+NewCommentForm.propTypes = {
+  saveComment: PropTypes.func,
+  userId: PropTypes.string
+}
 
-// }
+const mapDispatchToProps = (dispatch) => ({
+  saveComment (userId, commentValue) {
+    dispatch(saveComment(userId, commentValue))
+  }
+})
 
-export default NewCommentForm
+const mapStateToProps = (state) => ({
+  userId: state.user.id
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewCommentForm)
