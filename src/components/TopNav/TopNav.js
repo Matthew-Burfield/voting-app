@@ -11,7 +11,7 @@ const TopNav = () => (
     <div className='navItems'>
       <RadiumLink style={s.navLinks} to='/'>Home</RadiumLink>
       <RadiumLink style={s.navLinks} to='/'>Login</RadiumLink>
-      <RadiumLink style={s.navLinks} to='/'>Polls</RadiumLink>
+      <RadiumLink style={s.navLinks} to='/Polls'>Polls</RadiumLink>
     </div>
   </nav>
 )

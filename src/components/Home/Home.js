@@ -1,12 +1,12 @@
 import React from 'react'
-import s from './Home.css'
+
+import AppHeader from '../AppHeader'
 import LatestPoll from '../LatestPoll'
+import s from './Home.css'
 
 const Home = () => (
   <div style={s.app}>
-    <div style={s.appHeader}>
-      <h1>Latest Poll</h1>
-    </div>
+    <AppHeader header='Latest Poll' />
     <LatestPoll />
   </div>
 )

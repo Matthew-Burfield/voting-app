@@ -16,7 +16,7 @@ const DEFAULT_STATE = {
   },
   {
     id: '2',
-    creatorId: '1',
+    creatorId: '2',
     comment: 'This is another comment about the current poll'
   }]
 }

@@ -30,7 +30,7 @@ const LatestPoll = (props) => {
       {!userHasVoted &&
         <Poll onVote={handleOnVote} options={props.poll.options} />
       }
-      <Comments comments={props.poll.comments} />
+      <Comments comments={props.poll.comments} users={[props.user, { id: '2', name: 'Kieran' }]} />
     </section>
   )
 }
